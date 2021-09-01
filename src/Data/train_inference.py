@@ -25,8 +25,9 @@ def find_k_neighbors():
     """Receiving input and returning closest neigbors"""
     input_dict = json.loads(request.get_json())
 
+
     if TRANSFORMER:
-        result = KNN.kneighbors(TRANSFORMER.fit(pd.DataFrame(input_dict)),
+        result = KNN.kneighbors(TRANSFORMER.transform(pd.DataFrame(input_dict)),
                                 return_distance=False)
 
         return jsonify(preds=result[0][1:].tolist())
