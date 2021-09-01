@@ -10,110 +10,109 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
-// import { UserContext } from "../../lib/context/useContext";
 import { FaDog } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GrUserAdmin } from "react-icons/gr";
 
 const useStyles = makeStyles((theme) => ({
-	list: {
-		width: 200,
-	},
-	menuButton: {
-		marginRight: theme.spacing(2),
-	},
-	fullList: {
-		width: "auto",
-	},
-	menuIcon: {
-		color: "white",
-	},
+  list: {
+    width: 200,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  fullList: {
+    width: "auto",
+  },
+  menuIcon: {
+    color: "white",
+  },
 }));
 
 export default function SideBar() {
-	const classes = useStyles();
-	// const user = useContext(UserContext);
+  const classes = useStyles();
+  // const user = useContext(UserContext);
 
-	const [state, setState] = React.useState({
-		top: false,
-		left: false,
-		bottom: false,
-		right: false,
-	});
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
 
-	const toggleDrawer = (anchor, open) => (event) => {
-		if (
-			event.type === "keydown" &&
-			(event.key === "Tab" || event.key === "Shift")
-		) {
-			return;
-		}
-		setState({ ...state, [anchor]: open });
-	};
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
 
-	const list = (anchor) => (
-		<div
-			className={clsx(classes.list, {
-				[classes.fullList]: anchor === "top" || anchor === "bottom",
-			})}
-			role="presentation"
-			onClick={toggleDrawer(anchor, false)}
-			onKeyDown={toggleDrawer(anchor, false)}
-		>
-			<Divider />
-			<List>
-				<ListItem button>
-					<ListItemIcon>
-						<CgProfile />
-					</ListItemIcon>
-					map
-					{/* <Link to="/profile">Profile</Link> */}
-					<ListItemText />
-				</ListItem>
-				<ListItem button>
-					<ListItemIcon>
-						<CgProfile />
-					</ListItemIcon>
-					Game events
-					{/* <Link to="/search">Search</Link> */}
-					<ListItemText />
-				</ListItem>
-				{/* {user.isAdmin !== 0 && ( */}
-				<ListItem button>
-					<ListItemIcon>
-						<GrUserAdmin />
-					</ListItemIcon>
-					Find a host
-					{/* <Link to="/admin">Admin</Link> */}
-					<ListItemText />
-				</ListItem>
-				<ListItem button>
-					<ListItemIcon>
-						<GrUserAdmin />
-					</ListItemIcon>
-					Create event
-					{/* <Link to="/admin">Admin</Link> */}
-					<ListItemText />
-				</ListItem>
-			</List>
-		</div>
-	);
-	return (
-		<div>
-			{[""].map((anchor) => (
-				<React.Fragment key={anchor}>
-					<Button onClick={toggleDrawer(anchor, true)}>
-						<MenuIcon className={classes.menuIcon} />
-					</Button>
-					<Drawer
-						anchor={anchor}
-						open={state[anchor]}
-						onClose={toggleDrawer(anchor, false)}
-					>
-						{list(anchor)}
-					</Drawer>
-				</React.Fragment>
-			))}
-		</div>
-	);
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <Divider />
+      <List>
+        <ListItem button>
+          <ListItemIcon>
+            <CgProfile />
+          </ListItemIcon>
+          map
+          {/* <Link to="/profile">Profile</Link> */}
+          <ListItemText />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <CgProfile />
+          </ListItemIcon>
+          Game events
+          {/* <Link to="/search">Search</Link> */}
+          <ListItemText />
+        </ListItem>
+        {/* {user.isAdmin !== 0 && ( */}
+        <ListItem button>
+          <ListItemIcon>
+            <GrUserAdmin />
+          </ListItemIcon>
+          Find a host
+          {/* <Link to="/admin">Admin</Link> */}
+          <ListItemText />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <GrUserAdmin />
+          </ListItemIcon>
+          Create event
+          {/* <Link to="/admin">Admin</Link> */}
+          <ListItemText />
+        </ListItem>
+      </List>
+    </div>
+  );
+  return (
+    <div>
+      {[""].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}>
+            <MenuIcon className={classes.menuIcon} />
+          </Button>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+    </div>
+  );
 }

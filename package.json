@@ -4,19 +4,13 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",
-<<<<<<< HEAD
-=======
     "@material-ui/icons": "^4.11.2",
->>>>>>> 1ea13427f628afb47395678293a5a47a1dc9c4a6
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-=======
     "react-icons": "^4.2.0",
->>>>>>> 1ea13427f628afb47395678293a5a47a1dc9c4a6
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
