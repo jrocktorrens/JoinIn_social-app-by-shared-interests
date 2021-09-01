@@ -13,7 +13,7 @@ import "./home.css";
 
 const useStyles = makeStyles({
 	root: {
-		maxWidth: 500,
+		maxWidth: 350,
 		margin: 10,
 		overflow: "hidden",
 	},
@@ -54,9 +54,12 @@ export default function EventList(props) {
 						}}
 					>
 						<div>
-							<b>props.name</b>
+							<b>event.name</b>
 							<Typography variant="body2" color="textSecondary" component="p">
-								props.status
+								event.location
+							</Typography>
+							<Typography variant="body2" color="textSecondary" component="p">
+								event.time
 							</Typography>
 						</div>
 						<Button size="small" variant="outlined" onClick={handleOpen}>
@@ -78,7 +81,7 @@ export default function EventList(props) {
 				}}
 			>
 				<Fade in={open}>
-				<Event/>
+					<Event />
 				</Fade>
 			</Modal>
 		</div>

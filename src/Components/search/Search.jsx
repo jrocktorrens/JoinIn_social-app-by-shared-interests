@@ -155,13 +155,13 @@ export default function Search() {
 		<div className="search-con">
 			<Grid container component="main" className={classes.root}>
 				<Grid item xs={true} sm={12} md={12} className="parallax">
-					<form style={{ marginTop: 100 }}>
 						<div className="title">Lets play together</div>
+					<form style={{ marginTop: 100 }}>
 						<div className={classes.paper}>
 							<div>
 								<FormControl className={classes.formControl}>
 									<InputLabel htmlFor="grouped-select">
-										Find your game
+										Find near by gamers
 									</InputLabel>
 									<Select
 										defaultValue=""
@@ -169,12 +169,12 @@ export default function Search() {
 										onChange={(e) => setType(e.target.value)}
 									>
 										<MenuItem value="">
-											<em>None</em>
+											<em>All</em>
 										</MenuItem>
-										<MenuItem value={"dog"}>Dogs</MenuItem>
-										<MenuItem value={"cat"}>Cats</MenuItem>
-										<MenuItem value={"bird"}>Birds</MenuItem>
-										<MenuItem value={"rabbit"}>Rabbits</MenuItem>
+										<MenuItem value={"dog"}>play</MenuItem>
+										<MenuItem value={"cat"}>Soccer</MenuItem>
+										<MenuItem value={"bird"}>BasketBall</MenuItem>
+										<MenuItem value={"rabbit"}>Katan</MenuItem>
 									</Select>
 								</FormControl>
 								<Button
@@ -184,6 +184,9 @@ export default function Search() {
 									onClick={advancedSearch ? filter : simpleSearch}
 								>
 									Search
+								</Button>
+								<Button variant="contained" onClick={isAdvancedSearch}>
+									{advancedSearch ? "Search by event" : "search by user"}
 								</Button>
 							</div>
 						</div>

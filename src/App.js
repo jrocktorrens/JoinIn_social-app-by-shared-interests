@@ -6,6 +6,8 @@ import Signup from "./Components/Signup/Signup";
 import Login from "./Components/Login/Login";
 import CreateEvent from "./Components/CreateEvent/CreateEvent";
 import Nav from "./Components/layout/Nav";
+import Search from "./Components/search/Search";
+import Profile from "./Components/profile/Profile";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/Signup" component={Signup} />
         <Route path="/Login" component={Login} />
         <Route path="/CreateEvent" component={CreateEvent} />
+        <Route path="/search" component={Search} />
+        <Route path="/profile" component={Profile} />
       </Router>
     </>
   );

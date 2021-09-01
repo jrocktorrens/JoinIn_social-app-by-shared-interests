@@ -1,0 +1,27 @@
+.img {
+	border-radius: 50%;
+	max-width: 200px;
+}
+.my-events {
+	display: grid;
+	grid-template-columns: repeat(2, 420px);
+	padding: 30px;
+	list-style: none;
+	/* margin-top: 100px; grid-template-columns: repeat(3, 420px); */
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 10px;
+}
+.list-event{
+    display: grid;
+	grid-template-columns: repeat(2, 320px);
+	padding: 30px;
+	list-style: none;
+	/* margin-top: 100px; grid-template-columns: repeat(3, 420px); */
+	/* align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 10px; */
+
+}
