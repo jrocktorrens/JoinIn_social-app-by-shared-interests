@@ -19,6 +19,8 @@ function App() {
         <Route path="/Login" component={Login} />
         <Route path="/CreateEvent" component={CreateEvent} />
         <Route path="/map" component={Maps} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/search" component={Search} />
       </Router>
     </>
   );

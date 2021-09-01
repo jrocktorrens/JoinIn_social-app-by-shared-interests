@@ -92,6 +92,20 @@ export default function SideBar() {
           <Link to="/createevent">Create Event</Link>
           <ListItemText />
         </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <GrUserAdmin />
+          </ListItemIcon>
+          <Link to="/profile">My Profile</Link>
+          <ListItemText />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <GrUserAdmin />
+          </ListItemIcon>
+          <Link to="/search">Search events</Link>
+          <ListItemText />
+        </ListItem>
       </List>
     </div>
   );
