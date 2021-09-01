@@ -65,8 +65,7 @@ export default function SideBar() {
           <ListItemIcon>
             <CgProfile />
           </ListItemIcon>
-          map
-          {/* <Link to="/profile">Profile</Link> */}
+          <Link to="/map">Map</Link>
           <ListItemText />
         </ListItem>
         <ListItem button>
@@ -90,8 +89,21 @@ export default function SideBar() {
           <ListItemIcon>
             <GrUserAdmin />
           </ListItemIcon>
-          Create event
-          {/* <Link to="/admin">Admin</Link> */}
+          <Link to="/createevent">Create Event</Link>
+          <ListItemText />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <GrUserAdmin />
+          </ListItemIcon>
+          <Link to="/profile">My Profile</Link>
+          <ListItemText />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <GrUserAdmin />
+          </ListItemIcon>
+          <Link to="/search">Search events</Link>
           <ListItemText />
         </ListItem>
       </List>

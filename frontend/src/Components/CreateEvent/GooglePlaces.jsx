@@ -6,7 +6,6 @@ import {
 } from "react-places-autocomplete";
 import { useState } from "react";
 import scriptLoader from "react-async-script-loader";
-import { useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 
 function GooglePlace({ isScriptLoaded, isScriptLoadSucceed }) {
@@ -25,12 +24,10 @@ function GooglePlace({ isScriptLoaded, isScriptLoadSucceed }) {
       })
       .catch((error) => console.error("Error", error));
   };
-  useEffect(() => {
-    console.log(address);
-  }, [address]);
+
   if (isScriptLoaded && isScriptLoadSucceed) {
     return (
-      <div>
+      <div className="google">
         <PlacesAutocomplete
           value={address}
           onChange={handleChange}
