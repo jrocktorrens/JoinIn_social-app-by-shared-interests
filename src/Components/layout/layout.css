@@ -1,0 +1,22 @@
+.nav {
+	background-color: rgba(248, 158, 39, 0.89);
+	color: rgb(255, 255, 255);
+	font-size: 36px;
+	height: 70px;
+	box-shadow: 2px 1px 40px rgba(240, 239, 239, 0.24);
+	position: fixed;
+	width: 100%;
+	/* font-family: "Lilita One", cursive; */
+	z-index: 100;
+}
+.font {
+	/* font-family: "Lilita One", cursive; */
+}
+.logo-link {
+	color: white;
+	/* text-decoration: underline; */
+}
+a {
+	color: black;
+	/* text-decoration: none; */
+}
