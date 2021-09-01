@@ -1,7 +1,6 @@
 const express = require("express");
 const SQL = require("@nearform/sql");
 const router = express.Router();
-const { sign } = require("../lib/auth");
 const {
 	addUser,
 	query,
