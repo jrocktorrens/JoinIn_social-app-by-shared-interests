@@ -6,6 +6,8 @@ import Login from "./Components/Login/Login";
 import CreateEvent from "./Components/CreateEvent/CreateEvent";
 import Nav from "./Components/layout/Nav";
 import Maps from "./Components/Map/Map";
+import Search from "./Components/search/Search";
+import Profile from "./Components/profile/Profile";
 
 function App() {
   return (
