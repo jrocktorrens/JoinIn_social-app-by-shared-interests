@@ -1,5 +1,4 @@
 const mysql = require("mysql");
-const Postgrator = require("postgrator");
 const SQL = require("@nearform/sql");
 
 const db = mysql.createConnection({
@@ -60,7 +59,7 @@ const getUserByEmail = async (email, res) => {
 };
 exports.getUserByEmail = getUserByEmail;
 
-const addPet = async (column, values) => {
+const addEvent = async (column, values) => {
 	try {
 		const queryResult = await query(
 			`INSERT INTO pets (${column}) VALUES (${values});`
@@ -70,18 +69,18 @@ const addPet = async (column, values) => {
 		console.log(error);
 	}
 };
-exports.addPet = addPet;
+exports.addEvent = addEvent;
 
 
-const petList = async () => {
+const eventList = async () => {
 	try {
-		const queryResult = await query(SQL`SELECT * FROM pets`);
+		const queryResult = await query(SQL`SELECT * FROM events`);
 		return queryResult;
 	} catch (error) {
 		console.log(error);
 	}
 };
-exports.petList = petList;
+exports.eventList = eventList;
 
 const usersList = async () => {
 	try {
@@ -92,22 +91,6 @@ const usersList = async () => {
 	}
 };
 exports.usersList = usersList;
-
-const filterList = async (type, name, status, height, weight) => {
-	try {
-		const queryResult =
-			await query(SQL`SELECT * FROM pets WHERE type LIKE ${type}
-			AND name LIKE ${name} 
-            AND adoptionStatus like ${status} 
-            AND height like ${height} 
-            AND weight like ${weight} 
-			`);
-		return queryResult;
-	} catch (error) {
-		console.log(error);
-	}
-};
-exports.filterList = filterList;
 
 const filterByType = async (type) => {
 	try {
@@ -121,20 +104,7 @@ const filterByType = async (type) => {
 exports.filterByType = filterByType;
 
 
-const addPetImg = async (values, userId) => {
-	try {
-		const { petImg } = values;
-		const queryResult = await query(
-			`UPDATE pets SET img="${petImg}" WHERE pet_id=${userId}`
-		);
-		return queryResult;
-	} catch (error) {
-		console.log(error);
-	}
-};
-exports.addPetImg = addPetImg;
-
-const returnPet = async (petId) => {
+const returnEvent = async (petId) => {
 	try {
 		const queryResult = await query(
 			SQL`UPDATE pets SET
@@ -145,17 +115,7 @@ const returnPet = async (petId) => {
 		console.log(error);
 	}
 };
-exports.returnPet = returnPet;
+exports.returnEvent = returnEvent;
 
-const postgrator = new Postgrator({
-	migrationDirectory: "./migrations",
-	driver: "mysql",
-	host: "127.0.0.1",
-	port: 3306,
-	database: "practice",
-	username: "root",
-	password: "0522689870",
-	schemaTable: "Migrations",
-});
-exports.postgrator = postgrator;
+
 

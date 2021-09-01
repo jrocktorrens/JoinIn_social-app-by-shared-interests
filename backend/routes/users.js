@@ -9,22 +9,8 @@ const {
 	getUserByEmail,
 } = require("../data/mysql");
 const S = require("fluent-json-schema");
-const { validationMid } = require("../middlewares/validate");
-const authenticate = require("../middlewares/authentication");
 const bcrypt = require("bcrypt");
 
-const signUpSchema = S.object()
-	.prop("firstName", S.string().required())
-	.prop("lastName", S.string().required())
-	.prop("email", S.string().required())
-	.prop("password", S.string().minLength(6).maxLength(20).required())
-	.prop("phoneNum", S.string().required())
-	.valueOf();
-
-const loginSchema = S.object()
-	.prop("email", S.string().required())
-	.prop("password", S.string().minLength(6).maxLength(20).required())
-	.valueOf();
 
 router.post(
 	"/register",
@@ -39,8 +25,7 @@ router.post(
 			const newUser = await query(
 				SQL`SELECT * FROM users ORDER BY userId DESC LIMIT 1;`
 				);
-				const token = sign({ appUserId: user.id });
-			res.send({ user: newUser[0], token: token });
+			res.send({ user: newUser[0]});
 		} catch (err) {
 			console.log(err);
 			next(err.sqlMessage);
@@ -55,16 +40,16 @@ router.post("/login", async (req, res, next) => {
 			res.send({ err: "We didnt find this user" });
 			return;
 		}
-		const isPasswordMatch = await bcrypt.compare(
-			req.body.password,
-			user.password
-		);
-		if (!isPasswordMatch) {
-			res.send({ err: "incorrect password" });
-			return;
-		}
-		const token = sign({ appUserId: user.userId });
-		res.send({ text: "valid login input", token, user });
+		// const isPasswordMatch = await bcrypt.compare(
+		// 	req.body.password,
+		// 	user.password
+		// );
+		// if (!isPasswordMatch) {
+		// 	res.send({ err: "incorrect password" });
+		// 	return;
+		// }
+		// const token = sign({ appUserId: user.userId });
+		res.send({ text: "valid login input", user });
 	} catch (error) {
 		console.log(error);
 		next(error);
