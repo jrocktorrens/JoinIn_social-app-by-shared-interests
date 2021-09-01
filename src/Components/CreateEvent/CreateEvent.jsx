@@ -18,6 +18,7 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import GooglePlaces from "./GooglePlaces";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,6 +70,7 @@ export default function CreateEvent() {
           label="Name of the event"
           variant="outlined"
         />
+        <GooglePlaces />
 
         <TextField id="outlined-basic" label="Location" variant="outlined" />
 
