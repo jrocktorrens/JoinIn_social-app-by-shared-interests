@@ -1,7 +1,7 @@
 """
 Author: Ilia Altmark
 """
-import os
+# import os
 # import pickle
 import pandas as pd
 # import numpy as np
@@ -22,18 +22,15 @@ app = Flask(__name__)
 
 @app.route('/find_k_neighbors', methods=['POST'])
 def find_k_neighbors():
-    """Receiving input and returning closest neigbors"""
+    """Receiving input and returning closest neighbors"""
     input_dict = json.loads(request.get_json())
 
+    # print(pd.json_normalize(input_dict).info())
+    result = KNN.kneighbors(
+        TRANSFORMER.transform(pd.json_normalize(input_dict)),
+        return_distance=False)
 
-    if TRANSFORMER:
-        result = KNN.kneighbors(TRANSFORMER.transform(pd.DataFrame(input_dict)),
-                                return_distance=False)
-
-        return jsonify(preds=result[0][1:].tolist())
-
-    else:
-        return 'Error! Please train the transformer first!'
+    return jsonify(preds=result[0][1:].tolist())
 
 
 @app.route('/fit_k_neighbors', methods=['POST'])
