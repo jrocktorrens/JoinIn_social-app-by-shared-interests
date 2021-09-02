@@ -12,8 +12,8 @@ import Profile from "./Components/profile/Profile";
 function App() {
   return (
     <>
-      <Nav />
       <Router>
+      <Nav />
         <Route exact path="/" component={Welcome} />
         <Route path="/Signup" component={Signup} />
         <Route path="/Login" component={Login} />
