@@ -2,10 +2,10 @@ const mysql = require("mysql");
 const SQL = require("@nearform/sql");
 
 const db = mysql.createConnection({
-	user: "root",
-	host: "localhost",
-	password: "0522689870",
-	database: "practice",
+	user: "root@localhost",
+	host: "ip-172-31-0-22.us-east-2.compute.internal",
+	password: "Root1234!",
+	database: "JoinIn",
 });
 exports.db = db;
 
