@@ -1,34 +1,33 @@
 const express = require("express");
 const router = express.Router();
-const authenticate = require("../middlewares/authentication");
 const {
-	addPet,
-	petList,
-	addPetImg,
+	addEvent,
+	eventList,
 	query,
-	returnPet,
+	returnEvent,
 } = require("../data/mysql");
 
 router.post("/event", async (req, res) => {
 	try {
 		const {
 			id,
-			petType,
+			address,
 			name,
-			status,
-			breed,
-			color,
-			allergies,
-			petWeight,
-			petHeight,
-			diet,
-			img,
-			bio,
+			note,
+			dateCreate,
+			dateEvent,
+			participants,
+			rank,
+			phone,
+			hostId,
+			mapLon,
+			mapLat,
+			gameId,
 		} = req.body;
-		const reqValues = `'${id}', '${petType}', '${name}', '${status}', '${breed}', '${color}','${allergies}','${petWeight}', '${petHeight}', '${diet}', '${img}', '${bio}'`;
+		const reqValues = `'${id}', '${address}', '${name}', '${note}', '${dateCreate}', '${dateEvent}','${participants}','${rank}', '${phone}', '${hostId}', '${mapLon}', '${mapLat}','${gameId}'`;
 		const column =
-			"pet_id, type, name, adoptionStatus, breed, color, allergies, weight, height, diet, img, bio";
-		const queryResult = await addPet(column, reqValues);
+			"event_address, event_name, event_note, event_date_created, event_date, event_num_attendances, event_rank, event_phone_number, host_id, event_map_cor_lon, event_map_cor_lat, event_game_id";
+		const queryResult = await addEvent(column, reqValues);
 	} catch (err) {
 		console.log(err);
 		next(err);
@@ -37,7 +36,7 @@ router.post("/event", async (req, res) => {
 
 router.get("/allEvent", async (req, res) => {
 	try {
-		const petsList = await petList();
+		const petsList = await eventList();
 		res.send(petsList);
 	} catch (err) {
 		console.log(err);
@@ -51,8 +50,8 @@ router.post("/userEvents",  async (req, res) => {
 		await query(
 			`UPDATE pets SET user_id = ${userId}, adoptionStatus = '${petStatus}'  WHERE pet_id = '${petId}'`
 		);
-		const pet = await getPetById(petId);
-		res.send(pet);
+		const event = await getPetById(petId);
+		res.send(event);
 	} catch (err) {
 		console.log(err);
 	}
@@ -63,7 +62,7 @@ router.post("/returnEvent", async (req, res) => {
 	try {
 		const { petId } = req.body;
         console.log('~ req.body;', req.body);
-		await returnPet(petId);
+		await returnEvent(petId);
 		res.send({ message: "successfully removed that event" });
 	} catch (err) {
 		console.log(err);
@@ -74,20 +73,3 @@ module.exports = router;
 
 
 
-
-
-
-
-
-
-
-
-
-// router.get("/petImg", async (req, res) => {
-// 	try {
-// 		const petsList = await addPetImg(req.body);
-// 		res.send(petsList);
-// 	} catch (err) {
-// 		console.log(err);
-// 	}
-// });
