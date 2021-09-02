@@ -1,5 +1,5 @@
 import TextField from "@material-ui/core/TextField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -46,87 +46,67 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateEvent() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [value, setValue] = useState("female");
   const [games, setGames] = useState("");
+  const [form, setForm] = useState({});
+  const [location, setLocation] = useState();
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-  };
-
-  const handleGender = (event) => {
-    setValue(event.target.value);
+    setForm({ ...form, event_date: date });
   };
 
   const handleGames = (event) => {
     setGames(event.target.value);
   };
 
+  const handleChange = (event) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
+  useEffect(() => {
+    console.log(form);
+  }, [form]);
+
   return (
     <div className={classes.container}>
       <form className={classes.root}>
         <h2>Create a hosting event</h2>
         <TextField
+          name="event_name"
+          onChange={handleChange}
           id="outlined-basic"
           label="Name of the event"
           variant="outlined"
         />
-        <GooglePlaces />
 
-        <TextField id="outlined-basic" label="Location" variant="outlined" />
+        <GooglePlaces form={form} setForm={setForm} />
 
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Location</FormLabel>
-          <RadioGroup
-            aria-label="gender"
-            name="gender1"
-            value={value}
-            onChange={handleGender}
-          >
-            <FormControlLabel
-              value="Public property"
-              control={<Radio />}
-              label="Public property"
-            />
-            <FormControlLabel
-              value="Private home"
-              control={<Radio />}
-              label="Private home"
-            />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-          </RadioGroup>
-        </FormControl>
+        <TextField
+          name="event_note"
+          onChange={handleChange}
+          id="outlined-basic"
+          label="Event notes"
+          variant="outlined"
+          name="event_notes"
+        />
+
         <FormControl component="fieldset">
           <FormLabel component="legend">No. of participants</FormLabel>
           <RadioGroup
             aria-label="gender"
-            name="gender1"
-            value={value}
-            onChange={handleGender}
+            name="event_num_attendances"
+            value={form.event_num_attendances}
+            onChange={handleChange}
           >
+            <FormControlLabel value={10} control={<Radio />} label="Up to 10" />
             <FormControlLabel
-              value="<10"
-              control={<Radio />}
-              label="Up to 10"
-            />
-            <FormControlLabel
-              value=">10"
+              value={11}
               control={<Radio />}
               label="More than 10"
             />
           </RadioGroup>
         </FormControl>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Type of event</FormLabel>
-          <RadioGroup
-            aria-label="gender"
-            name="gender1"
-            value={value}
-            onChange={handleGender}
-          >
-            <FormControlLabel value="no" control={<Radio />} label="Yes" />
-            <FormControlLabel value="yes" control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormControl>
+
         <div>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justifyContent="space-around">
@@ -159,8 +139,9 @@ export default function CreateEvent() {
           <Select
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
-            value={games}
-            onChange={handleGames}
+            name="event_game_id"
+            value={form.event_game_id}
+            onChange={handleChange}
             label="Games"
           >
             <MenuItem value="Table top">Table top</MenuItem>
@@ -168,23 +149,6 @@ export default function CreateEvent() {
             <MenuItem value="Bar games">Bar games</MenuItem>
             <MenuItem value="Board games">Board games</MenuItem>
             <MenuItem value="Card games">Card games</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel id="demo-simple-select-outlined-label">
-            Location
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined"
-            value={games}
-            onChange={handleGames}
-            label="Location"
-          >
-            <MenuItem value="Northern Israel">Northern Israel</MenuItem>
-            <MenuItem value="Center Israel">Center Israel</MenuItem>
-            <MenuItem value="Southern Israel">Southern Israel</MenuItem>
           </Select>
         </FormControl>
 
@@ -205,7 +169,7 @@ export default function CreateEvent() {
           </Select>
         </FormControl>
         <div className="btn-container">
-          <button className="form-btn">Sign Up</button>
+          <button className="form-btn">Create Event</button>
         </div>
       </form>
     </div>

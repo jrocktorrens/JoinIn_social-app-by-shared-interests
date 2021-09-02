@@ -1,16 +1,11 @@
 import PlacesAutocomplete from "react-places-autocomplete";
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from "react-places-autocomplete";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useState } from "react";
 import scriptLoader from "react-async-script-loader";
 import TextField from "@material-ui/core/TextField";
 
-function GooglePlace({ isScriptLoaded, isScriptLoadSucceed }) {
+function GooglePlace({ isScriptLoaded, isScriptLoadSucceed, form, setForm }) {
   const [address, setAddress] = useState("");
-
   const handleChange = (value) => {
     setAddress(value);
   };
@@ -21,6 +16,11 @@ function GooglePlace({ isScriptLoaded, isScriptLoadSucceed }) {
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
         console.log("Success", latLng);
+        const location = {
+          event_map_cor_lat: latLng.lat,
+          event_map_cor_lng: latLng.lng,
+        };
+        setForm({ ...form, ...location });
       })
       .catch((error) => console.error("Error", error));
   };
@@ -39,8 +39,9 @@ function GooglePlace({ isScriptLoaded, isScriptLoadSucceed }) {
             getSuggestionItemProps,
             loading,
           }) => (
-            <div>
+            <div style={{ display: "block", width: "100%" }}>
               <TextField
+                style={{ width: "100%" }}
                 id="outlined-basic"
                 label="Location"
                 variant="outlined"
