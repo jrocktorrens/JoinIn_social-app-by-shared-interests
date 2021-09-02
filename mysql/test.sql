@@ -9,6 +9,12 @@ CREATE TABLE `hosts` (
 CREATE TABLE `users` (
   `user_id` int PRIMARY KEY AUTO_INCREMENT,
   `user_favorite_game` int,
+  `user_age` int,
+  `user_sex` varchar(255),
+  `user_diet` varchar(255),
+  `user_smokes` varchar(255),
+  `user_pets` varchar(255),
+  `user_speaks` varchar(255),
   `user_first_name` varchar(255),
   `user_last_name` varchar(255),
   `user_city` varchar(255),
